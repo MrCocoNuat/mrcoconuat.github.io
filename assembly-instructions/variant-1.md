@@ -127,4 +127,4 @@ Attach the cell holder to the underside of the board and connect its leads to `B
 
 The button switch controls main power to the whole circuit. 
 
-On first install of the cell, the Charge and Protect module may refuse to output power. Plugging in a USB cable to the connector to start a charge impulse will kick the module into operation.1
+On first install of the cell, the Charge and Protect module may refuse to output power. Plugging in a USB cable to the connector to start a charge impulse will kick the module into operation.

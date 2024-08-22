@@ -4,9 +4,9 @@ or, how I learned to see 3D in 2D.
 
 ## What?
 
-I first learned about true holography from the representative [wikpedia page](https://en.wikipedia.org/wiki/Holography) (Wikipedia of course being the a veritable fount of surface-level knowledge - really, just check out the article of the day! I'm sure it's interesting). Sure, I had seen bold claims of holographic displays made of cheap plastic, holographic trading cards, holographic wrapping paper... none of them were interesting at all once you learned the tricks behind them, mere illusions, projections, or in most cases just plain sparkliness masquerading as 3-dimensionality.
+I first learned about true holography from the representative [wikpedia page](https://en.wikipedia.org/wiki/Holography) (Wikipedia of course being a veritable fount of surface-level knowledge - really, just check out the article of the day! I'm sure it's interesting). Sure, I had seen bold claims of holographic displays made of cheap clear plastic, holographic trading cards, holographic wrapping paper... none of them were interesting at all once you learned the tricks behind them, mere illusions, projections, or in most cases just plain sparkliness masquerading as 3-dimensionality.
 
-But this new kind of holography promised actual complicated math, with wave interference and... well, that is mostly it, and the math's not all that complicated either. The article offers a more complete analysis of the now 60-year old technique, but suffice it to say: shine a perfect laser beam at both an object (the object beam) and also straight at a photographic plate (the reference beam), so that object beam reflecting off of the object hits the plate too. Then you have the simple interference:
+But this new kind of holography promised actual complicated math, with wave interference and... well, that is mostly it, and the math's not all that complicated either. The wikipedia article offers a more complete analysis of the now 60-year old technique, but suffice it to say: shine a perfect laser beam at both an object (the object beam) and also straight at a photographic plate (the reference beam), so that object beam reflecting off of the object hits the plate too. Then you have the simple interference:
 
 $${b_{reference} \oplus b_{object} = p_{recorded}}$$
 

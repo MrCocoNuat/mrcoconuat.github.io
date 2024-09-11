@@ -8,7 +8,9 @@ hello world again
 
 [here for simple laser pointer assembly instructions?](/posts/assembly-instructions/variant-1.md)
 
-[creating a holography laser](/posts/perfect-pointer/holographer.md)
+[creating a green holography laser](/posts/perfect-pointer/holographer.md)
+
+[rgb laser modules and controllers](/posts/rgb-laser/rgb.md)
 
 ## Miscellaneous Electronics 
 

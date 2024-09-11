@@ -4,6 +4,14 @@ In a perfect world, lasers would be easy and cheap to generate for any wavelengt
 
 No matter, those LCD display people figured this out years ago. By combining pure-ish red, green, and blue light, our eyes can be tricked into perceiving many many different ratios of long, medium, and short cone stimulation, and that gets interpreted as color!
 
+The science behind this is fascinating, but also complicated (like almost all biology is). We can abstract a little bit and just consider the CIE color space, a standard that is agreed to somewhat well represent the span of human color perception:
+
+![cie space](assets/cie-xyz.png)
+
+The curved boundary on the top represents monochromatic stimulation, or the most pure a color can be. By varying the relative intensities of 2 monochromatic lights, any stimulation (perceived as color) on the line between them can be synthesized. Varying 3 allows anything within the triangle formed between them. And, given the primaries we are using are lasers (so negligibly close to monochrome for this application) at the typical `450nm`, `520nm`, `650nm`, this covers a vast portion of the color space and allows reproduction of a similarly huge array of colors to the human eye. (in fact, much more than `sRGB` or even fancy schmancy color spaces like `Rec2020`)
+
+## Combining Beams
+
 Doing this with lasers is not that bad. To achieve a single beam composed of three, we can use 1 of 2 techniques. The first is knife-edging -- think a beam reflected by the very edge of a mirror so that it ends up shining right next to another beam. This works, but is pretty lame because you can never have all the beams occupy the same space.
 
 ![knife-edged lasers](assets/knife-edging.png)

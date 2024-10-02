@@ -1,6 +1,4 @@
-# mrcoconuat.github.io
-
-hello world again
+# **OBEY** *your drive to create.*
 
 ## Software
 
@@ -12,12 +10,20 @@ hello world again
 
 [rgb laser modules and controllers](/posts/rgb-laser/rgb.md)
 
-## Miscellaneous Electronics 
+## Electronic Engineering
 
 [Shikanoko Notokan's Antlers (in progress)](/posts/antlers/antlers.md)
+
+## Consumer Electronics
+
+[fixing an air fryer](/posts/air-fryer/fryer.md)
+
+---
 
 ## My Links
 
 [home repository](https://github.com/MrCocoNuat/mrcoconuat.github.io)
 
 [FehPI, a GraphQL API for Fire Emblem Heroes. Supports all the languages!](https://feh-pi.vercel.app)
+
+## Other Links

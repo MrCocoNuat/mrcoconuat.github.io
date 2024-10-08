@@ -1,13 +1,13 @@
 # Nokotan's Antlers
-shikanokonokonokokoshitantan
+*shikanokonokonokokoshitantan*
 
-shikanokonokonokokoshitantan
+*shikanokonokonokokoshitantan*
 
-shikanokonokonokokoshitantan
+*shikanokonokonokokoshitantan*
 
-shikanokonokonokokoshitantan
+*shikanokonokonokokoshitantan*
 
-nun!
+**_nun!_**
 
 ![nokotan busting through a doorway](assets/nokotan.jpg)
 
@@ -18,6 +18,8 @@ Here at LowTierTech it is time for another wearable electronics project! This ti
 
 ## Design
 
+### Structure and 3D Modeling
+
 I'm not a very talented 3d modeler, so I borrowed the [hard work](https://cults3d.com/en/3d-model/fashion/noko-shikanoko-antlers-for-cosplay-modelvault) of Modelvault (who apparently is one) over on Cults3d. It was easily resized to `27cm` in length, which I thought would fit me well.
 
 ![3d view of model](assets/model.png)
@@ -25,15 +27,41 @@ I'm not a very talented 3d modeler, so I borrowed the [hard work](https://cults3
 But I had a couple more requirements for the model - this is LowTierTech, not LowTierCosplay (no matter how much I wish it were so...). Those requirements were:
 
 - The antlers must sit at the right angle on whatever they are mounted to (probably a headband and not my cranium).
-- The antlers must be detachable from whatever their mount.
-- The antlers must light up on command.
+- The antlers must be detachable from their mount.
+- The antlers must light up on command. Therefore they must be hollow, and also have electrical power transmitted to them.
 
-These necessitated some truly bumbling Blender work which my lack of experience in 3d CAD can account for, but after a few hours of searching through the internet and searching through Blender's UI, I was able to hollow out the model to have `1mm` or so thick walls, remove the root, and adjust the angle of the root of each antler to around `30` degrees instead of the `7` they came as.
+These necessitated some truly bumbling Blender work which my lack of experience in 3D CAD can account for, but after a few hours of searching through the internet and Blender's UI, I was able to hollow out the model to have `1mm` or so thick walls, remove the solid base, and adjust the angle of the base of each antler to around `30` degrees instead of the `7` they came as.
 
 ![blender screenshot](assets/blender.png)
 
-##
+And in solid cured resin form, the printed antlers come out nicely translucent - although with such thin walls, some warping at the base was to be expected. No matter, a few seconds over a stove burner softened them up enough to restore the correct shape.
 
-## Installing the "Sensor"
+![printed antlers](assets/printed.jpg)
 
-Nokotan's antlers have the curious ability to sense all sorts of aspects of the true nature of a person, and they glow a blinking red when they do so. Naturally, these antlers must do the same. 
+### Installing the "Sensors"
+
+Nokotan's antlers have the curious ability to sense the true nature of a person, and they glow a blinking red when they do so. Naturally, these antlers must do the same. Distributing a even red glow across the entire interior of the antler proved to be a nontrivial task, however.
+
+I chose some beefy [RGB LEDs](https://www.amazon.com/Chanzon-Power-Common-Anode-300mA/dp/B01DBZK64K) to light this model up for three reasons:
+- I had 2 on hand from years ago - this should always be the primary reason for a scrappy tinkerer who uses every part to its fullest potential like me.
+- LDs, especially red ones, would have imparted a more pure ruby-red glow (`650nm` compared to the orange-ish `638nm` of common high power red LEDs). However, the intolerance of older red LDs to power supply noise would be difficult to negotiate with - the antlers are removable, so power can disappear at any time! Besides, I think the ability for these antlers to take on any color is an upgrade!
+- LDs are also sensitive to heat, and efficient as they may be, it would be difficult to adequately cool such tiny heat-producing parts in a space with absolutely no airflow, whereas the LED COBs come on a thick copper plate that comfortably soaks up the intermittent heat of the "sensor" function. However, due to average heat concerns, the LEDs must still be limited to outputting around 0.25W of light total.
+
+Driving these specific LEDs is easy enough - simply pass in around `10V`, enough for 3 blue LED chips in series, to a ["Picobuck" 3-channel current supply buck converter](https://www.sparkfun.com/products/13705) and supply 3 TTL PWM (or analog, but we are going digital here) control inputs. I also had 2 of these on hand from many years ago, and they comfortably fit within the base of each antler.
+
+### Designing Mounts
+
+With detachability a requirement, the obvious choice is magnet mounting - and neodymium magnets in particular can somewhat easily be soldered to, allowing them to transmit power and signals as well. We need 5 lines, `V+`, `GND`, `TTL_R`, `TTL_G`, `TTL_B`. The magnet arrangement must also be keyed, with reverse polarity (and other horrific misconnections) impossible. Making the magnets *not* evenly spaced around the antler's base as well as changing up the polarity of the magnets is a good way to do this.
+
+### Choosing a Sensor (to trigger the "Sensor")
+
+Ideally, an overtly manual action like a button press would not be required to trigger the antlers' glow, since that is meant to be an innate ability of Shikanoko's antlers. Being able to be triggered by subtle movements limits wearable options severely, though, to those like accelerometers, myographs, and more exotic options like brainwave scanners.
+
+### The Headband
+
+Home Base: The headband will hold the power supply and the smarts. Guesstimating total power consumption, each antler will be `12V 200mA` and the headband circuitry `3V 50mA`, thus a 1S 18650 cell is plenty.
+
+For the microcontroller, I used the beloved `ATTINY85`, since only 3 control lines, and 2 sensor lines were necessary.
+
+## Assembly
+

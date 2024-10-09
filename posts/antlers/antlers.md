@@ -38,22 +38,36 @@ And in solid cured resin form, the printed antlers come out nicely translucent -
 
 ![printed antlers](assets/printed.jpg)
 
-### Installing the "Sensors"
+### Installing "Sensors"
+
+![nokotan's sensor](assets/nokotan-sensor.png)
+
+Here is my forte ~
 
 Nokotan's antlers have the curious ability to sense the true nature of a person, and they glow a blinking red when they do so. Naturally, these antlers must do the same. Distributing a even red glow across the entire interior of the antler proved to be a nontrivial task, however.
 
 I chose some beefy [RGB LEDs](https://www.amazon.com/Chanzon-Power-Common-Anode-300mA/dp/B01DBZK64K) to light this model up for three reasons:
-- I had 2 on hand from years ago - this should always be the primary reason for a scrappy tinkerer who uses every part to its fullest potential like me.
+- I had 2 on hand unused from years ago - this should always be the primary reason for a scrappy tinkerer who uses every part to its fullest potential like me.
 - LDs, especially red ones, would have imparted a more pure ruby-red glow (`650nm` compared to the orange-ish `638nm` of common high power red LEDs). However, the intolerance of older red LDs to power supply noise would be difficult to negotiate with - the antlers are removable, so power can disappear at any time! Besides, I think the ability for these antlers to take on any color is an upgrade!
-- LDs are also sensitive to heat, and efficient as they may be, it would be difficult to adequately cool such tiny heat-producing parts in a space with absolutely no airflow, whereas the LED COBs come on a thick copper plate that comfortably soaks up the intermittent heat of the "sensor" function. However, due to average heat concerns, the LEDs must still be limited to outputting around 0.25W of light total.
+- LDs are also sensitive to heat, and efficient as they may be, it would be difficult to adequately cool such tiny heat-producing parts in a space with absolutely no airflow, whereas the LED COBs come on a thick copper plate that comfortably soaks up the intermittent heat of the "sensor" function. However, due to average heat concerns, the each LED COB must still be limited to outputting around 0.5W of light on average over a long period.
 
-Driving these specific LEDs is easy enough - simply pass in around `10V`, enough for 3 blue LED chips in series, to a ["Picobuck" 3-channel current supply buck converter](https://www.sparkfun.com/products/13705) and supply 3 TTL PWM (or analog, but we are going digital here) control inputs. I also had 2 of these on hand from many years ago, and they comfortably fit within the base of each antler.
+Driving these specific LEDs is easy enough - simply pass in at least `11V`, enough for the 3 blue LED chips in series, to a ["Picobuck" 3-channel current supply buck converter](https://www.sparkfun.com/products/13705) and supply 3 TTL PWM (or analog, but we are going digital here) control inputs. I also had 2 of these on hand from many years ago, and they comfortably fit within the base of each antler. If you are following along at home, then of course any current buck (so any buck at all with a current sense resistor) powerful enough to light up your LEDs of choice will suffice, no need to pay `$17.50` twice for these if you don't want to.
+
+![sensor parts](assets/sensor-parts.jpg)
+
+I ended up gluing the LED COB angled onto to the buck converter itself to create a compact unit - remember to insulate with polyimide tape!
+
+![sensor assembled](assets/sensors.jpg)
+
+Without any control inputs, these are default full-power at `300mA` or so per channel and light up each antler a brilliant white, although the glow is not even close to uniform. Therefore, some lightguiding is needed.
 
 ### Designing Mounts
 
 With detachability a requirement, the obvious choice is magnet mounting - and neodymium magnets in particular can somewhat easily be soldered to, allowing them to transmit power and signals as well. We need 5 lines, `V+`, `GND`, `TTL_R`, `TTL_G`, `TTL_B`. The magnet arrangement must also be keyed, with reverse polarity (and other horrific misconnections) impossible. Making the magnets *not* evenly spaced around the antler's base as well as changing up the polarity of the magnets is a good way to do this.
 
-### Choosing a Sensor (to trigger the "Sensor")
+### Installing Sensors
+
+Actual sensors, this time.
 
 Ideally, an overtly manual action like a button press would not be required to trigger the antlers' glow, since that is meant to be an innate ability of Shikanoko's antlers. Being able to be triggered by subtle movements limits wearable options severely, though, to those like accelerometers, myographs, and more exotic options like brainwave scanners.
 
@@ -61,7 +75,7 @@ Ideally, an overtly manual action like a button press would not be required to t
 
 Home Base: The headband will hold the power supply and the smarts. Guesstimating total power consumption, each antler will be `12V 200mA` and the headband circuitry `3V 50mA`, thus a 1S 18650 cell is plenty.
 
-For the microcontroller, I used the beloved `ATTINY85`, since only 3 control lines, and 2 sensor lines were necessary.
+For the microcontroller, I used the beloved `ATTINY85`, since only 3 control lines and 2 sensor lines were necessary, and `8KiB` is plenty of storage for even hundreds of lighting patterns.
 
 ## Assembly
 

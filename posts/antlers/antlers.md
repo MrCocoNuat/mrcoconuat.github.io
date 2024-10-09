@@ -42,8 +42,6 @@ And in solid cured resin form, the printed antlers come out nicely translucent -
 
 ![nokotan's sensor](assets/nokotan-sensor.png)
 
-Here is my forte ~
-
 Nokotan's antlers have the curious ability to sense the true nature of a person, and they glow a blinking red when they do so. Naturally, these antlers must do the same. Distributing a even red glow across the entire interior of the antler proved to be a nontrivial task, however.
 
 I chose some beefy [RGB LEDs](https://www.amazon.com/Chanzon-Power-Common-Anode-300mA/dp/B01DBZK64K) to light this model up for three reasons:

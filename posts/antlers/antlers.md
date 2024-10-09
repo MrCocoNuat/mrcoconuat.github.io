@@ -9,7 +9,7 @@
 
 **_nun!_**
 
-![nokotan busting through a doorway](assets/nokotan.jpg)
+![nokotan busting through a doorway](assets/nokotan.png)
 
 
 ## ...?

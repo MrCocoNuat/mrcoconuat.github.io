@@ -57,11 +57,35 @@ I ended up gluing the LED COB angled onto to the buck converter itself to create
 
 ![sensor assembled](assets/sensors.jpg)
 
-Without any control inputs, these are default full-power at `300mA` or so per channel and light up each antler a brilliant white, although the glow is not even close to uniform. Therefore, some lightguiding is needed.
+Without any control inputs, these are default full-power at `300mA` or so per channel and light up each antler a brilliant white, although the glow is not even close to uniform. Therefore, some lightguiding is needed. I went full jank and used 2 hot melt glue sticks stuck in a line - they actually work quite well, though much worse than I imagine proper glass fibres would. If you are also using hot melt glue sticks, work on attaching the magnets first (see the section on [Designing Mounts](#designing-mounts)! Otherwise the glue may work itself loose while soldering work is performed.
+
+![light piping](assets/light-pipe.jpg)
+
+Additionally, pulling the control inputs down with `10k` resistors is also a good idea, in case by pure chance the power connections are made before control connections.
 
 ### Designing Mounts
 
-With detachability a requirement, the obvious choice is magnet mounting - and neodymium magnets in particular can somewhat easily be soldered to, allowing them to transmit power and signals as well. We need 5 lines, `V+`, `GND`, `TTL_R`, `TTL_G`, `TTL_B`. The magnet arrangement must also be keyed, with reverse polarity (and other horrific misconnections) impossible. Making the magnets *not* evenly spaced around the antler's base as well as changing up the polarity of the magnets is a good way to do this.
+With detachability a requirement, the obvious choice is magnet mounting - and neodymium magnets in particular can somewhat easily be soldered to, allowing them to transmit power and signals as well.
+
+A side note - soldering to magnets can be annoying. First, most soldering iron tips will be attracted by magnets, so that is bad enough. But also, for magnetic connectors, it is important to have as little solder lumping up on the mating surfaces as possible, so that magnets can sit flat against each other. And finally, heating magnets as little as possible is generally a good idea to keep them strong. A good way to make all of these easier is to attach another magnet on top of the mating surface, shielded by polyimide tape so that solder does not stick to it (and solder the magnets together). This picture shows a stack of 3, the middle one operating as a shield.
+
+![magnet shielding](assets/magnet-shield.jpg)
+
+We need 5 lines, `V+`, `GND`, `TTL_R`, `TTL_G`, `TTL_B`. The magnet arrangement must also be keyed, with reverse polarity (and other horrific misconnections) impossible. A good arrangement to achieve this is to have `~1k` resistors protecting the control inputs, and `V+`, `GND` on adjacent to each other, all 5 magnet connections in a rough pentagon. **Make sure that some magnets have the opposite polarity as the others**, that way the antler will be repulsed from the mount if it is rotated instead of attracted:
+
+![magnet arrangement](assets/magnet-arrangement.jpg)
+
+After wiring up the magnets, the magnets themselves may be weakened due to the heat. Sticking another magnet onto each is a good way to restore strength - use a glue to secure these.
+
+![magnets wired](assets/magnets-wired.jpg)
+
+This magnetic arrangement makes it completely impossible to misconnect anything - rotating the connector any arbitrary angle connects the incoming power lines to either protected control lines (so a harmless amount of current flows) or nothing at all. The other 3 incoming lines are signals, and those have limited output (from protection resistors on the mount side) and are therefore also protected from high current. And finally, rotating this arrangement at all causes powerful repulsive forces resisting any connection at all in the first place.
+
+This completes the work on the "sensors" - finally, restore your light-piping solution and secure the "sensors" inside the antlers.
+
+![sensors wired](assets/sensors-wired.jpg)
+
+![sensors installed](assets/sensors-installed.jpg)
 
 ### Installing Sensors
 
@@ -73,7 +97,7 @@ Ideally, an overtly manual action like a button press would not be required to t
 
 Home Base: The headband will hold the power supply and the smarts. Guesstimating total power consumption, each antler will be `12V 200mA` and the headband circuitry `3V 50mA`, thus a 1S 18650 cell is plenty.
 
-For the microcontroller, I used the beloved `ATTINY85`, since only 3 control lines and 2 sensor lines were necessary, and `8KiB` is plenty of storage for even hundreds of lighting patterns.
+For the microcontroller, I used my beloved `ATTINY85` since only 3 control lines and 2 sensor lines were necessary, and `8KiB` is plenty of storage for even hundreds of lighting patterns.
 
 ## Assembly
 

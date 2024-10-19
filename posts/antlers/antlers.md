@@ -103,11 +103,11 @@ Actual sensors, this time.
 
 Ideally, an overtly manual action like a button press on a remote would not be required to trigger the antlers' glow, since that is meant to be an innate ability of Shikanoko's antlers. Being able to be triggered by subtle movements limits wearable options severely, though, to those like accelerometers, myographs, hidden switches actuatable by head muscles, and more exotic options like brainwave scanners.
 
-### The Headband
+### The Headband: Home Base
 
-Home Base: The headband will hold the power supply and the smarts. Guesstimating total power consumption, each antler will be `12V 200mA` and the headband circuitry `3V 50mA`, thus a 1S 18650 cell is plenty, or a smaller flat cell too. I went with that, using a removable connector.
+The headband will hold the power supply and the smarts. Guesstimating total power consumption, each antler will be `12V 200mA` and the headband circuitry `3V 50mA`, thus a 1S 18650 cell is plenty, or a smaller flat cell too. I went with that, using a removable connector.
 
-For the microcontroller, I used my beloved `ATTINY85` since only 3 control lines and 2 sensor lines were necessary, and `8KiB` is plenty of storage for even hundreds of lighting patterns.
+For the microcontroller, I used my beloved `ATTINY85` since only 3 control lines and up to 2 sensor lines were necessary, and `8KiB` is plenty of storage for even hundreds of lighting patterns. For the program loaded onto the microcontroller, see [notsu-antlers](https://github.com/MrCocoNuat/notsu-antlers), and modify it however you like (according to its license!) to add your own lighting patterns and sensor logic.
 
 ## Assembly
 

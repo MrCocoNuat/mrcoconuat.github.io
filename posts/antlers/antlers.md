@@ -81,6 +81,8 @@ You can make both antlers identical (even in polarity) to keep them interchangea
 
 Adding even more magnets can be a good idea, depending on how powerful yours are. Aim for each mount to be able to hold up the entire antler set when you grab it only by an antler, but this isn't strictly necessary. Don't add too many though, or you won't be able to remove the antler from your head easily when the time comes.
 
+If you desire even more clutch power, then you can always cheat with some tacky adhesive on the magnet surfaces directly, of course.
+
 It is important to "print" the magnet constellation of each antler accurately onto the mount plate. To do this, stick magnets onto each magnet of the antler so there are now 2 magnets with 1 free, apply adhesive to the top free magnet, then press the whole thing onto the mount plate.
 
 Afterwards, install 5 corresponding pads for the spring contacts to engage and wire them up. I recommend adding 3 `~1k` resistors protect the control inputs from accidental misconnections to power pins, since who knows what can happen?

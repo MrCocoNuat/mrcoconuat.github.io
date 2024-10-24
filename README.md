@@ -1,4 +1,4 @@
-# **OBEY** *your drive to create.*
+# Above all else, **OBEY** *your drive to create.*
 
 ## Software
 
@@ -12,7 +12,7 @@
 
 ## Electronic Engineering
 
-[Shikanoko Notokan's Antlers (in progress)](/posts/antlers/antlers.md)
+[Shikanoko Notokan's Antlers](/posts/antlers/antlers.md)
 
 ## Consumer Electronics
 

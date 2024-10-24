@@ -57,57 +57,82 @@ I ended up gluing the LED COB angled onto to the buck converter itself to create
 
 ![sensor assembled](assets/sensors.jpg)
 
-Without any control inputs, these are default full-power at `300mA` or so per channel and light up each antler a brilliant white, although the glow is not even close to uniform. Therefore, some lightguiding is needed. I went full jank and used 2 hot melt glue sticks stuck in a line - they actually work quite well, though much worse than I imagine proper glass fibres would. If you are also using hot melt glue sticks, work on attaching the magnets to this module first (see the section on the [connection](#a-detachable-connection))! Otherwise the glue may work itself loose while soldering work is performed.
+Without any control inputs, these are default full-power at `300mA` or so per channel and light up each antler a brilliant white, although the glow is not even close to uniform. Pulling these control inputs down with `10k` resistors is also a good idea, in case by pure chance the power connections are made before control connections.
+
+![led pulldowns](assets/led-pulldown.jpg)
+
+Additionally, some lightguiding is needed to smooth out the glow. I went full jank and used 2 hot melt glue sticks stuck in a line - they actually work quite well, though much worse than I imagine proper glass fibres would.
 
 ![light piping](assets/light-pipe.jpg)
 
-Additionally, pulling the control inputs down with `10k` resistors is also a good idea, in case by pure chance the power connections are made before control connections.
-
 ### A Detachable Connection
 
-With detachability a requirement, the obvious choice is magnet mounting - and neodymium magnets in particular can somewhat easily be soldered to, allowing them to transmit power and signals as well.
+With detachability a requirement, the obvious choice is magnet mounting - and neodymium magnets in particular can somewhat easily be soldered to, allowing them to transmit power and signals as well. **However, after a first pass using magnets as contacts, I realized that more than 3 magnets make for TERRIBLE contacts**, since they are usually rigid and so a slight deviation from perfect planarity (3 points determine a plane) of a magnet constellation will result in non-connection. Instead, **use magnets for positioning and clutch force, which is what they excel in, and use spring contacts for the actual power and signals**. Each of these, formed from a waste resistor leg, can bend many many times without breaking and are decently elastic. They can easily interface with copper tape pads on the opposing PCB, although initially positioning them is a little tedious and touching them afterwards can knock them out of alignment, necessitating a quick repair. Of course, more robust commercial spring contact solutions exist, but they aren't free.
 
-A side note - soldering to magnets can be annoying. First, most soldering iron tips will be attracted by magnets, so that is bad enough. But also, for magnetic connectors, it is important to have as little solder lumping up on the mating surfaces as possible, so that magnets can sit flat against each other. And finally, heating magnets as little as possible is generally a good idea to keep them strong. A good way to make all of these easier is to attach another magnet on top of the mating surface, wrapped tightly by polyimide tape so that solder does not stick to it (and subsequently solder the magnets tightly together). This picture shows a stack of 3, the middle one operating as a shield.
+![leaf spring contacts](assets/leaf-springs.jpg)
 
-![magnet shielding](assets/magnet-shield.jpg)
+We need 5 lines, `V+`, `GND`, `TTL_R`, `TTL_G`, `TTL_B`, so 5 springs for each antler suffice.
 
-We need 5 lines, `V+`, `GND`, `TTL_R`, `TTL_G`, `TTL_B`. The magnet arrangement must also be keyed, with reverse polarity (and other horrific misconnections) impossible. A good arrangement to achieve this is to have `~1k` resistors protecting the control inputs, and `V+`, `GND` on adjacent to each other, all 5 magnet connections in a rough pentagon. **Make sure that some magnets have the opposite polarity as the others**, that way the antler will be repulsed from the mount instead of attracted if it is rotated:
+The magnet constellation to hold the antler to the mount must also be keyed, with reverse polarity (and other horrific misconnections) impossible. A good arrangement is to have the magnets in a rectangle, 2 on one side and 2 on the other side with opposing polarity so that if flipped, the antler will be repulsed from the mount instead of attracted if it is rotated:
 
-![magnet arrangement](assets/magnet-arrangement.jpg)
+You can make both antlers identical (even in polarity) to keep them interchangeable, but then matching the magnet pattern exactly is tough. I recommend adding more magnets to key left vs. right too, making sure that the left antler, even if rotated properly, is repulsed by the right mount.
 
-You can make both antlers identical (even in polarity) to keep them interchangeable, but then matching the magnet pattern exactly is tough. One technique is to "print" the pattern onto another surface by assembling one arrangement, sticking more magnets on top of each, applying a glue to the top side of those, and pressing your surface onto the glue. This should reproduce the pattern on your printing surface, which you can re-print on the other module.
+![magnet arrangement](assets/magnet-arrangement.png)
 
-After wiring up the magnets, the magnets themselves may be weakened due to the heat. Doubling up another magnet onto each is a good way to restore strength - use a glue to secure these after the magnets are stuck together. Don't let the glue separate the conductive surfaces of the magnets, or they won't be able to transmit anything.
+Adding even more magnets can be a good idea, depending on how powerful yours are. Aim for each mount to be able to hold up the entire antler set when you grab it only by an antler, but this isn't strictly necessary. Don't add too many though, or you won't be able to remove the antler from your head easily when the time comes.
 
-![magnets wired](assets/magnets-wired.jpg)
+It is important to "print" the magnet constellation of each antler accurately onto the mount plate. To do this, stick magnets onto each magnet of the antler so there are now 2 magnets with 1 free, apply adhesive to the top free magnet, then press the whole thing onto the mount plate.
 
-This magnetic arrangement makes it completely impossible to misconnect anything - rotating the connector any arbitrary angle connects the incoming power lines to either protected control lines (so a harmless amount of current flows) or nothing at all. The other 3 incoming lines are signals, and those have limited output (from protection resistors on the mount side) and are therefore also protected from high current. And finally, rotating this arrangement at all causes powerful repulsive forces resisting any connection at all in the first place.
+Afterwards, install 5 corresponding pads for the spring contacts to engage and wire them up. I recommend adding 3 `~1k` resistors protect the control inputs from accidental misconnections to power pins, since who knows what can happen?
 
-This completes the work on the "sensors" - finally, restore your light-piping solution and secure the "sensors" inside the antlers.
+![magnets installed](assets/mount-magnets.jpg)
 
-![sensors wired](assets/sensors-wired.jpg)
+This completes the work on the "sensors" and mounts, all that is left is to secure them inside the antlers.
 
-![sensors installed](assets/sensors-installed.jpg)
+### The Headband: Home Base
 
-### Designing Mounts
+The headband will hold the power supply and the smarts. Guesstimating total power consumption, each antler will need `12V 200mA` for just the red portion, and the headband circuitry `3V 50mA`, thus a 1S 18650 cell and a cheap boost converter is plenty, or a smaller flat cell too. However, already going through the effort of including a removable connector, I decided to design a more robust power pack backed by 2S 18650s and a slightly more capable boost converter to output approximately `11.5V` that would be able to portably power other gadgets in the future too. Add a velcro band, and this can easily be secured to a limb.
 
-It is important to print the magnet pattern of each antler accurately onto the mount plate. To do this, stick magnets onto each magnet of the antler, apply adhesive, then press the whole thing onto the mount plate.
+It kind of looks like an improvised explosive device though, and I'm not sure strapping it to my body will help much in that regard. Oh well, just don't take this into airports.
 
-I decided to (pretty much) permanently attach the 2 mount plates to a headband. Check your placements in a mirror!
+![power pack](assets/power-pack.jpg)
 
-![mount plates](assets/mount-plates.jpg)
+For the microcontroller, I used my beloved `ATTINY85` since only 3 control lines and up to 2 sensor lines were necessary, and `8KiB` is plenty of storage for even hundreds of lighting patterns. For the program loaded onto the microcontroller, see [notsu-antlers](https://github.com/MrCocoNuat/notsu-antlers), and modify it however you like (according to its license!) to add your own lighting patterns and sensor logic.
+
+**These images of the smarts board contain a wiring mistake: `V+`, the red wire, should supply from the `11.5V` input, Not the `5V` regulated output! Follow the pink-line edits!**
+
+![smarts](assets/smarts-iso.jpg)
+
+The circuit to support the smarts is extremely simple, an `LM317` supplies about `5V` to the microcontroller (look ma, no capacitors!), and otherwise there is only wiring.
+
+![smarts top view](assets/smarts.jpg)
+![smarts bottom view](assets/smarts-underside.jpg)
+
+### Installing Mounts and Antlers
+
+I decided to (pretty much) permanently attach the 2 mount plates to the headband. Check your placements in a mirror, the worst thing is to have lopsided antlers!
+
+![example mount](assets/left-mount.jpg)
+
+Wiring these parts up can be difficult, since the magnets restrict available space around the all-important contacts, and the contacts themselves also present mechanical exclusion zones. The exact wiring arrangement will depend on your specific physical design, but no matter, you can do it!
 
 ### Installing Sensors
 
 Actual sensors, this time.
 
-Ideally, an overtly manual action like a button press on a remote would not be required to trigger the antlers' glow, since that is meant to be an innate ability of Shikanoko's antlers. Being able to be triggered by subtle movements limits wearable options severely, though, to those like accelerometers, myographs, hidden switches actuatable by head muscles, and more exotic options like brainwave scanners.
+Ideally, an overtly manual action like a button press on a remote would not be required to trigger the antlers' glow, since that is meant to be an innate ability of Shikanoko's antlers. Being able to be triggered by subtle movements limits wearable options severely, though, to those like accelerometers, myographs, and more exotic options like brainwave scanners. But most of those don't abide by the LowTierTech manifesto at all!
 
-### The Headband: Home Base
+Instead, I settled on the simplest option - a hidden switch. I have the ability to voluntarily flex my posterior auricular muscles ("wiggle my ears"), so a cleverly hidden hair trigger switch on the headband behind my ear can easily trigger the glowing action. The positioning is a little finicky, but so would it be for any of those other high-tech options. Of course, interfacing with this is extremely easy as well, and is handled in code.
 
-The headband will hold the power supply and the smarts. Guesstimating total power consumption, each antler will be `12V 200mA` and the headband circuitry `3V 50mA`, thus a 1S 18650 cell is plenty, or a smaller flat cell too. I went with that, using a removable connector.
-
-For the microcontroller, I used my beloved `ATTINY85` since only 3 control lines and up to 2 sensor lines were necessary, and `8KiB` is plenty of storage for even hundreds of lighting patterns. For the program loaded onto the microcontroller, see [notsu-antlers](https://github.com/MrCocoNuat/notsu-antlers), and modify it however you like (according to its license!) to add your own lighting patterns and sensor logic.
+![switch](assets/switch.jpg)
 
 ## Assembly
 
+Glue everything together with your adhesive of choice, and...
+
+![glow off](assets/glow-off.jpg)
+![glow on](assets/glow-on.jpg)
+
+Go, brilliant deer, and celebrate with some well deserved deer crackers!
+
+![deer crackers!](assets/deer-crackers.png)

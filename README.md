@@ -1,29 +1,35 @@
-# Above all else, **OBEY** *your drive to create.*
+# *OBEY your drive to create.*
 
-## Software
+## Articles
 
-## Optoelectronics and Lasers
+### Software
+
+[an 8KiB dungeon crawler rpg *in progress*](/posts/tiny-dungeon/dungeon.md)
+
+### Optoelectronics and Lasers
 
 [here for simple laser pointer assembly instructions?](/posts/assembly-instructions/variant-1.md)
 
-[creating a green holography laser](/posts/perfect-pointer/holographer.md)
+[creating a green holography laser with the Osram PL530](/posts/perfect-pointer/holographer.md)
 
 [rgb laser modules and controllers](/posts/rgb-laser/rgb.md)
 
-## Electronic Engineering
+### Electronic Engineering
 
-[Shikanoko Notokan's Antlers](/posts/antlers/antlers.md)
+my Essentials workbench *in progress*
 
-## Consumer Electronics
+[Shikanoko Notokan's Antlers - Cosplay](/posts/antlers/antlers.md)
 
-[fixing an air fryer](/posts/air-fryer/fryer.md)
+### Consumer Electronics
+
+[fixing a Ninja Foodi Tendercrisp air fryer](/posts/air-fryer/fryer.md)
 
 ---
 
-## My Links
-
-[home repository](https://github.com/MrCocoNuat/mrcoconuat.github.io)
+### My Links
 
 [FehPI, a GraphQL API for Fire Emblem Heroes. Supports all the languages!](https://feh-pi.vercel.app)
 
-## Other Links
+[github.io home repository](https://github.com/MrCocoNuat/mrcoconuat.github.io)
+
+### Other Cool Links

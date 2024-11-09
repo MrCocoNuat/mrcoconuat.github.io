@@ -1,11 +1,13 @@
 # Tiny Dungeon 
-The classic ATtiny series are wonderful microcontrollers for all sorts of microcontollery tasks like [measuring instruments](https://github.com/MrCocoNuat/tiny-oscilloscope), OOOO, and PPPP. With up to `8KiB` of flash storage, `512B` of SRAM (that's right, no `Ki` or `Mi` here), and a bonus of `512B` EEPROM, simple single tasks like those are perfectly suited for a computer chip that is just capable enough, and that is why they are so beloved here on LowTierTech.
+The classic ATtiny series are wonderful microcontrollers for all sorts of microcontollery tasks like [measuring instruments](https://github.com/MrCocoNuat/tiny-oscilloscope), edge computing/automation, and of course fun electronic toys. With up to `8KiB` of flash storage, `512B` of SRAM (that's right, no `Ki` or `Mi` here), and a bonus of `512B` EEPROM, simple single tasks like those are perfectly suited for a computer chip that is just capable enough, and that is why they are so beloved here on LowTierTech.
 
-But, I dream of more! Why can't I game on one of these? And thus, Tiny Dungeon was born.
+But, I dream of more! Why can't I game on one of these? And thus, [Tiny Dungeon](https://github.com/mrcoconuat/tiny-dungeon) was born.
 
 ## Hardware
 
 Really, there's nothing special here.
+![schematic](https://github.com/MrCocoNuat/tiny-dungeon/blob/main/schematic/tiny-dungeon-schematic.png)
+
 
 ### The Smarts, and In and Out
 
@@ -24,6 +26,8 @@ There's no need for specialty equipment here, a `1S` lithium cell will work perf
 ### Input Sensing - Where are You Touching Me?
 
 Inputs for real-time systems should ideally all generate interrupts. However, this piece of software is a game, and so the game's main thread should always take priority. Therefore, a simple polling approach is better - stuff the 8 directional stick buttons into a byte.
+
+This somewhat arcane code takes advantage of the `PIN*` registers to grab many inputs all at once, then place them into the output in the right place.
 ```c++
 // cram the 8 bits (high = direction pushed) into 1 return byte
 // with order: msb- LD LR LU LL RD RR RU RL -lsb
@@ -37,11 +41,11 @@ uint8_t getJoystickState() {
 
 ### Video Output
 
-Our canvas is `128` by `64`, monochrome of course. And we have help here - fellow blogger Technoblogy has an excellent [library](http://www.technoblogy.com/show?23OS) for interfacing with this display's controller. I added a modification so that instead of plotting the pixels of text on top of contents already on the screen ("OR plotting") new content simply replaces what is already there
+Our canvas is `128` by `64`, monochrome of course. And we have help here - fellow blogger Technoblogy has an excellent [library](http://www.technoblogy.com/show?23OS) for interfacing with this display's controller. I heavily modified it to add many new features exposed by the display controller and also to change the character plotting mode so that instead of plotting the pixels of text on top of contents already on the screen ("OR plotting") new content simply replaces what is already there.
 
-Unfortunately, over the bit-banged I2C speeds that our microcontroller can reach, even this tiny display is so many pixels that writing solid blocks manually to the entire screen takes around 5 seconds, and the pixel-addressing here doesn't help that. Therefore animations are generally right out, and our designs will have to be sparing on the lit pixels - no matter, black is the new black!
+Unfortunately, over the bit-banged I2C speeds that our microcontroller can reach, even this tiny display is so many pixels that writing solid blocks manually to the entire screen takes around 2 seconds, and the pixel-addressing here doesn't help that. Therefore animations are generally right out, and our designs will have to be sparing on the lit pixels - no matter, black is the new black!
 
-Additionally, for saving program space there are several more optimizations to be made. The character map included in the library can be trimmed down quite a bit (who needs all those letters) and in fact customized freely to support arbitrary glyphs that can represent dungeon elements. There is not even a need to stick to the predefined `8x6` grid, that may be suitable for text but possibly not pixel art and sprites!
+Additionally, for saving program space there are several more optimizations to be made. The character map included in the library can be trimmed down quite a bit (who needs all those letters) and in fact customized freely to support arbitrary 8-pixel high glyphs that can represent dungeon elements - see [tiny-dungeon's spritesheet](https://github.com/MrCocoNuat/tiny-dungeon/blob/main/spritesheet/spritesheet.png)
 ```c++
 // Character set for text - stored in program memory
 // 6 columns of 8
@@ -74,4 +78,4 @@ What is worse is that the support functions listed above already steal about `2.
 
 ### Overall Design - What's a Dungeon Crawler?
 
-This game is somewhat inspired by the wildly successful [Pixel Dungeon](https://pixeldungeon.watabou.ru/) and its many derivatives. Its procedurally generated design and focus on replayability through random environmental factors lends itself very well to
+This game is somewhat inspired by the wildly successful [Pixel Dungeon](https://pixeldungeon.watabou.ru/) and its many derivatives. Its procedurally generated design and focus on replayability through random environmental factors lends itself very well to a high playability vs. program code size ratio.

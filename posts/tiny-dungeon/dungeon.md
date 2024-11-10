@@ -84,7 +84,7 @@ const uint16_t timerTable[] = {
   8098 // B
 };
 ```
-We use a fun trick to simplify the code greatly, bit shifting to divide these values by `2` each time raises by whole octaves. Additionally, alternating the prescaler between `/8` for sound output and `/0` for stop output is predicated on the sign bit of the input argument.
+We use a fun trick to simplify the code greatly, bit shifting to divide these values by `2` each time raises by whole octaves. Additionally, alternating the prescaler between `/8` for sound output and `/0` for stop output is predicated on the sign bit of the input argument. Both `OCR1A` (for CTC so that the timer overflows upon hitting that value) and `OCR1B` (actually controlling the pin output) must be set.
 ```c++
 void playTone(int8_t tone){
   // tone < 0 means stop output, so check that sign bit

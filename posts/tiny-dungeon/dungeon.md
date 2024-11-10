@@ -58,14 +58,41 @@ const uint8_t CharMap[96][6] PROGMEM = {
 
 ### Music to My Ears
 
-No room for fancy audio controllers here, we have got 1 piezospeaker and a variable frequency square wave. I used Timer1's output compare B, located on pin A5. By adjusting the value of `OCR1A` and `OCR1B` and the prescaler (if that wide of a range is needed), different frequencies and duty cycles can be output.
+No room for fancy audio controllers here, we have got 1 piezospeaker and a variable frequency square wave. I used Timer1's output compare B, located on pin A5. By adjusting the value of `OCR1A` and `OCR1B` and the prescaler (if that wide of a range is needed), different frequencies and duty cycles can be output. However, the prescaler adjustment just isn't necessary, since a `16` bit timer gives such a large frequency range that it would easily cover the entire human audible range.
 ```c++
-  // output on OC1B
+  // compare match output on OC1B
   TCCR1A = (1 << COM1B0);
   // CTC (clear on OCR1A), /8 prescaler
-  TCCR1B = (1 << WGM12) | (1 << CS10);
-  OCR1A = 4000;  // for CTC
-  OCR1B = 4000;  // about 2kHz out
+  TCCR1B = (1 << WGM12);
+```
+
+For some simple math, with a prescaler of `/8` the timer ticks at `1MHz` and with `2^16` ticks in total the timer overflows at `64Hz`, which is absolutely enough as a frequency minimum. Then, we find the nearest value that gives a 12TET chord tone - C0 at `65Hz`. Dividing by `2^(1/12)` 12 times gives timer values for the rest of the octave.
+```c++
+// These values are in geometric progression.
+const uint16_t timerTable[] = {
+  15288, // C for 65Hz: 1MHz timer ticks / 65Hz desired overflow frequency = 15288 ticks to overflow
+  14430, // C#
+  13620, // D
+  12856, // Db
+  12134, // E
+  11453, // F
+  10810, // F#
+  10204, // G
+  9631, // Ab
+  9090, // A
+  8580, // Bb
+  8098 // B
+};
+```
+We use a fun trick to simplify the code greatly, bit shifting to divide these values by `2` each time raises by whole octaves. Additionally, alternating the prescaler between `/8` for sound output and `/0` for stop output is predicated on the sign bit of the input argument.
+```c++
+void playTone(int8_t tone){
+  // tone < 0 means stop output, so check that sign bit
+  // in TCCR1B[CS12:CS10], 010 is prescaler /8 and 000 is stop timer
+  TCCR1B = (TCCR1B & 0b11111000) | (!(tone & (1 << 7)) << CS11);
+  // just set this anyway, no point adding a branch
+  OCR1A = OCR1B = timerTable[tone % 12] >> (tone / 12);
+}
 ```
 
 ## The Game

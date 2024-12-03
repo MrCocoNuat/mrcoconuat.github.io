@@ -24,6 +24,7 @@ my Essentials workbench *in progress*
 
 [fixing a Ninja Foodi Tendercrisp air fryer](/posts/air-fryer/fryer.md)
 
+[fixing a Nokia N800 Internet Tablet](/posts/nokia/nokia.md)
 ---
 
 ### My Links

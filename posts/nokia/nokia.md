@@ -55,7 +55,7 @@ Unfortunately, I realized that my back cover was still equipped with a magnet, a
 
 ![flowchart](assets/troubleshooting.png)
 
-Looking at the service manual's troubleshooting flowchart for "Internal Memorycard" on page 128, the next step was to scope `VMMC`, or the voltage supply from the mainboard to the card itself. The flowchart suggests measuring from `C5201`... where's that? Just check page 207 for the board layout!
+Looking at the service manual's troubleshooting flowchart for "Internal Memorycard" on page 128, the next step was to scope `VMMC`, or the voltage supply from the mainboard to the card itself. The flowchart suggests measuring from `C5201`... where's that? Just check page 48 for the board layout!
 
 ![board layout](assets/layout.png)
 ![sd board](assets/board-shot.jpg)
@@ -64,7 +64,12 @@ Ughh... placing the SD card in the connector covers up the capacitor of interest
 
 ![schematic](assets/schematic.png)
 
-Time to drill down into the schematics on page 207. 
+Time to drill down into the schematics on page 207. I saw that `C5200`, `L5200`, and `C5201` were connected quite simply to each other and to ground. Verifying this with my probe was simple, so last was the connection from this power line to the SD card connector pin itself, which immediately rang alarm bells as no connection was detected - Bingo! Perhaps over time, mechanical stressing of the pin weakened its connection to the mainboard.
+
+![reflowed connector](assets/sd-connector.jpg)
+
+Doing a quick reflow job with my iron in a tight spot (hot air + 15 year old plastic connector = probably not good), and doing the same magnet trick with the SD card held in to the connector, I was greeted with: "Memory card available".
+
 
 ## Pimping your N800
 

@@ -22,7 +22,9 @@ After that comes the issue of connecting the cell to the device. Using the origi
 
 After hooking up the new battery, the device initially booted, then disappointingly immediately shut off. However, connecting the original BP-5L in parallel onto the pogo pins (only safe since it has so little capacity it doesn't appreciably charge or discharge the new cell) fixed this issue! So something is up with the third `M` pin.
 
-I detected a `120kΩ` resistance between the BP-5L's `-` and `M` pins. It did not appear to change with temperature, so probably it is meant as a signature to identify a real Nokia cell (like Apple either used to do or still does in their USB cables). In any case, ooking up a `100kΩ` resistor between the corresponding diagnostic pads cleared this issue right up.
+I detected a `120kΩ` resistance between the BP-5L's `-` and `M` pins. It did not appear to change with temperature, so probably it is meant as a signature to identify a real Nokia cell (like Apple either used to do or still does in their USB cables). In any case, hooking up a `100kΩ` resistor between the corresponding diagnostic pads cleared this issue right up.
+
+**Update**: It turns out that this 3rd pin is a resistance-lookup [BSI](https://wiki.maemo.org/N900_Software_BME), or battery size indicator, with my `100kΩ` resistor signifying around `1250mAh`. Ehh, close enough.
 
 ![actual wiring view 1](assets/battery-1.jpg)
 ![actual wiring view 2](assets/battery-2.jpg)
@@ -38,6 +40,31 @@ The modification here is straightforward, simply connecting USB `V+` to the char
 ![actual wiring charging](assets/usb-charging.jpg)
 
 Do note that this might affect communication with the official software updater tool that instructs you to connect USB while also disconnecting the charge cable, but how many times are you going to need to update the OS on this thing?
+
+## "Internal" Memory - Advanced!
+
+The N800 has, in addition to 256MB of integrated flash storage, 2 SD/MMC card slots - one is labeled internal, the other removable. For most of my living memory, the internal card slot has not functioned at all.
+
+This being a board-level repair rather than a module-level one, I needed better information: the service schematic diagrams downloaded from [ElektroTanya](https://elektrotanya.com/nokia_n800_rx_34_service_manual_schematics.pdf/download.html),  were wonderfully comprehensive.
+
+Initial web searches on maemo.org for `"internal memory card sd not detected recognized"` came up with promising results - it seemed that the most common failure mode was the back cover losing its adhesived magnet.
+
+An explanation: The N800's internal card slot is inaccessible and protected when the back cover is attached, this way the device can detect when it is safe to write to the card as there is no chance of the user removing it. The magnet itself is sensed by a Hall Effect sensor on the mainboard through a cutout in the back metal cover (a similar in concept but mechanical mechanism backs the removable card's door).
+
+Unfortunately, I realized that my back cover was still equipped with a magnet, and Hall effect sensor looked fine outwardly. Maybe this sensor was not functioning? After scoping out the *really* tiny ground and power pins, the third output pin responded resoundingly to a test magnet, dropping from `2V` to `0V`... no dice. I needed to go deeper, to the board itself.
+
+![flowchart](assets/troubleshooting.png)
+
+Looking at the service manual's troubleshooting flowchart for "Internal Memorycard" on page 128, the next step was to scope `VMMC`, or the voltage supply from the mainboard to the card itself. The flowchart suggests measuring from `C5201`... where's that? Just check page 207 for the board layout!
+
+![board layout](assets/layout.png)
+![sd board](assets/board-shot.jpg)
+
+Ughh... placing the SD card in the connector covers up the capacitor of interest... I decided instead to just interpose a thin wire on the `VMMC` spring contact instead. Upon jiggling the test magnet that I placed over the Hall Effect Sensor That revealed that the mainboard was actually sending power to the newly detected card! But it was peaking at `1.1V`... the heck?
+
+![schematic](assets/schematic.png)
+
+Time to drill down into the schematics on page 207. 
 
 ## Pimping your N800
 

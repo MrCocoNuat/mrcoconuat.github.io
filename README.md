@@ -20,6 +20,12 @@ my Essentials workbench *in progress*
 
 [Shikanoko Notokan's Antlers - Cosplay](/posts/antlers/antlers.md)
 
+LowTechHighDanger I: ZVS "Piernas" Driver *in progress*
+
+LowTechHighDanger II: `10kVAC` Tappable Transformer Module
+
+[LowTechHighDanger III: `400VDC` CW Generator](/posts/cockcroft-walton/generator.md)
+
 ### Consumer Electronics
 
 [fixing a Ninja Foodi Tendercrisp air fryer](/posts/air-fryer/fryer.md)

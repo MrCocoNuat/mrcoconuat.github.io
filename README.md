@@ -24,12 +24,20 @@ my Essentials workbench *in progress*
 
 [fixing a Ninja Foodi Tendercrisp air fryer](/posts/air-fryer/fryer.md)
 
+### Food
+
+one-pot sticky rice *in progress*
+
+walnut-encrusted baked salmon *in progress*
+
+[how to fry rice at home the right way](/posts/cooking/rice.md)
+
 ---
 
-### My Links
+## My Links
 
 [FehPI, a GraphQL API for Fire Emblem Heroes. Supports all the languages!](https://feh-pi.vercel.app)
 
 [github.io home repository](https://github.com/MrCocoNuat/mrcoconuat.github.io)
 
-### Other Cool Links
+## Other Cool Links

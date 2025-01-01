@@ -6,7 +6,7 @@ But, I dream of more! Why can't I game on one of these? And thus, [Tiny Dungeon]
 ## Hardware
 
 Really, there's nothing special here.
-![schematic](https://github.com/MrCocoNuat/tiny-dungeon/blob/main/schematic/tiny-dungeon-schematic.png)
+![schematic](https://github.com/MrCocoNuat/tiny-dungeon/raw/4454a35d5a49e746bfeda2a8038fe422a04f1cc3/schematic/tiny-dungeon-schematic.png)
 
 
 ### The Smarts, and In and Out

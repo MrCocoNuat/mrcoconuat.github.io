@@ -22,7 +22,7 @@ my Essentials workbench *in progress*
 
 LowTechHighDanger I: ZVS "Piernas" Driver *in progress*
 
-LowTechHighDanger II: `10kVAC` Tappable Transformer Module
+LowTechHighDanger II: `10kVAC` Tappable Transformer Module *in progress*
 
 [LowTechHighDanger III: `400VDC` CW Generator](/posts/cockcroft-walton/generator.md)
 

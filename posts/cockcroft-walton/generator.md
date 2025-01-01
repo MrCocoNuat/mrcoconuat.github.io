@@ -53,7 +53,9 @@ Hooking it up to the input relay, make sure to connect it to the normally open l
 
 ## Software
 
-I implemented the [control software](https://github.com/mrcoconuat/cw-voltage-generator) via a state machine. The microcontroller keeps track of its current state (e.g. `IDLE`, `CHARGING`, `CHARGED`) and constantly checks the output capacitor's voltage and button input to figure out its next state transition.
+I implemented the [control software](https://github.com/mrcoconuat/cw-voltage-generator) via a state machine. The microcontroller keeps track of its current state (e.g. `IDLE`, `CHARGING`, `CHARGED`) and constantly checks the output capacitor's voltage and button input to figure out its next state transition. Additionally each of the states has a unique LED illumination effect (e.g. `BREATHE`, `BLINK`, `ON`) so the user knows what is going on.
+
+A safety measure is that whenever the output capacitor's voltage rises above the absolute maximum set voltage (e.g. `420V` for `450V` capacitors), the state immediately changes to `ERROR` and locks there, cutting off further power.
 
 One peculiarity I ran into was an unfortunate characteristic of this sort of generator: when the huge output capacitors were almost empty, the current surge on starting charging was overloading my AC power source! Therefore, I had to add some additional stages for `TRICKLE_CHARGING`, which simply pulse the relay on for only a very short time before allowing the power source to recover and resume charging. Given a couple of seconds, this did reliably charge the output capacitors to a point where the relay could be kept on and charge the rest of the way.
 
@@ -63,3 +65,7 @@ I built this converter on several protoboards, with absolutely no faith that all
 
 ![overall shot](assets/board-top.jpg)
 ![overall shot bottom](assets/board-bottom.jpg)
+
+And this converter turned out quite powerful, capable of sustaining `80W` of output at `400V`, although my test load sure wasn't capable of taking it... oops!
+
+![in operation](assets/in-operation.jpg)

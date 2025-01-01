@@ -1,6 +1,6 @@
 # *OBEY your drive to create.*
 
-## Articles
+## I want to create...
 
 ### Software
 
@@ -14,7 +14,7 @@
 
 [rgb laser modules and controllers](/posts/rgb-laser/rgb.md)
 
-### Electronic Engineering
+### Electronic Engineering Projects
 
 my Essentials workbench *in progress*
 

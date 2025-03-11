@@ -6,6 +6,8 @@
 
 [an 8KiB dungeon crawler rpg *in progress*](/posts/tiny-dungeon/dungeon.md)
 
+[an 8KiB chess game + engine](/posts/tiny-chess/chess.md)
+
 ### Optoelectronics and Lasers
 
 [here for simple laser pointer assembly instructions?](/posts/assembly-instructions/variant-1.md)
@@ -31,6 +33,8 @@ LowTechHighDanger I: ZVS "Piernas" Driver *in progress*
 [fixing a Ninja Foodi Tendercrisp air fryer](/posts/air-fryer/fryer.md)
 
 [fixing a Nokia N800 Internet Tablet](/posts/nokia/nokia.md)
+
+[fixing an old MP3 player](/posts/mp3/mp3.md)
 
 ### Food
 

@@ -53,3 +53,5 @@ walnut-encrusted baked salmon *in progress*
 [github.io home repository](https://github.com/MrCocoNuat/mrcoconuat.github.io)
 
 ## Other Cool Links
+
+[An older feature article on Planet-Casio about my modifications to a calculator to make it rechargable](https://www.planet-casio.com/Fr/forums/topic16347-1-convertir-sa-graph-90e-des-piles-a-une-batterie-lipo.html)

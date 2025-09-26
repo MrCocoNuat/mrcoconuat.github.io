@@ -50,8 +50,10 @@ walnut-encrusted baked salmon *in progress*
 
 [FehPI, a GraphQL API for Fire Emblem Heroes. Supports all the languages!](https://feh-pi.vercel.app)
 
+[Uma Musume: Pretty Derby statistics tool, for all of your RNG defusing needs (under construction)](https://uma-stats.vercel.app)
+
 [github.io home repository](https://github.com/MrCocoNuat/mrcoconuat.github.io)
 
 ## Other Cool Links
 
-[An older feature article on Planet-Casio about my modifications to a calculator to make it rechargable](https://www.planet-casio.com/Fr/forums/topic16347-1-convertir-sa-graph-90e-des-piles-a-une-batterie-lipo.html)
+[An older feature article on Planet-Casio about my modifications to a graphing calculator to make it rechargable](https://www.planet-casio.com/Fr/forums/topic16347-1-convertir-sa-graph-90e-des-piles-a-une-batterie-lipo.html)

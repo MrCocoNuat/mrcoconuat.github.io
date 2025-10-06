@@ -51,13 +51,18 @@ With my input maxing out at around `60Vpp`, that meant I should use 8-10 stages 
 
 Hooking it up to the input relay, make sure to connect it to the normally open line, that way with no microcontroller authorization, the relay will not give power to the capacitor chain.
 
+## Soft Start
+
+This hardware did work, but not consistently. The issue with capacitor-based generators is that when at `0V`, they appear essentially like a short circuit on the input, which caused my AC driver to fail upon trying to supply the massive inrush current. The solution here was simple enough - at these power levels, a beefy `10O` or so soft start resistor on the input to the capacitor chain will work just fine to limit the inrush current. I used 16 large `150O` resistors in parallel in the output path of the main relay to make sure that even if the resistors were stuck in the power path (say the bypass relay failed), destruction wouldn't be immediate, but this was probably overkill. After the microcontroller decides that enough voltage has built up in the generator system so that bypassing the soft start resistors won't cripple the power source, it does so with another relay. 
+
+![soft start top](assets/soft-start-top.jpg)
+![soft start bottom](assets/soft-start-bottom.jpg)
+
 ## Software
 
 I implemented the [control software](https://github.com/mrcoconuat/cw-voltage-generator) via a state machine. The microcontroller keeps track of its current state (e.g. `IDLE`, `CHARGING`, `CHARGED`) and constantly checks the output capacitor's voltage and button input to figure out its next state transition. Additionally each of the states has a unique LED illumination effect (e.g. `BREATHE`, `BLINK`, `ON`) so the user knows what is going on.
 
 A safety measure is that whenever the output capacitor's voltage rises above the absolute maximum set voltage (e.g. `420V` for `450V` capacitors), the state immediately changes to `ERROR` and locks there, cutting off further power.
-
-One peculiarity I ran into was an unfortunate characteristic of this sort of generator: when the huge output capacitors were almost empty, the current surge on starting charging was overloading my AC power source! Therefore, I had to add some additional stages for `TRICKLE_CHARGING`, which simply pulse the relay on for only a very short time before allowing the power source to recover and resume charging. Given a couple of seconds, this did reliably charge the output capacitors to a point where the relay could be kept on and charge the rest of the way.
 
 ## Assembly
 
@@ -66,6 +71,6 @@ I built this converter on several protoboards, with absolutely no faith that all
 ![overall shot](assets/board-top.jpg)
 ![overall shot bottom](assets/board-bottom.jpg)
 
-And this converter turned out quite powerful, capable of sustaining `80W` of output at `400V`, although my test load sure wasn't capable of taking it... oops!
+And this converter turned out quite powerful, capable of easily sustaining `80W` of output at `400V`, although my test load sure wasn't capable of taking it... oops!
 
 ![in operation](assets/in-operation.jpg)

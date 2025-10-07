@@ -40,7 +40,7 @@ LowTechHighDanger I: ZVS "Piernas" Driver *in progress*
 
 one-pot sticky rice *in progress*
 
-walnut-encrusted baked salmon *in progress*
+[walnut-encrusted baked salmon](/posts/cooking/salmon.md)
 
 [how to fry rice at home the right way](/posts/cooking/rice.md)
 

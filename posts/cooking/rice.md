@@ -1,5 +1,7 @@
 # Fried Rice at Home the Right Way
 
+Not a recipe, but a general guide.
+
 First things first: without a restaurant-style gas burner and wok capable of handling the high heat of said burner, you simply aren't going to infuse the *wok hei* necessary for that smoky caramelized aroma into your rice at home. But, this still leaves open the opportunity or a different flavor profiles that you cannot get in a restaurant, and isn't that the entire point of home cooking?
 
 ## The Procedure
